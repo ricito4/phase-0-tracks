@@ -13,3 +13,4 @@ A commit is the process letting the computer know you are finished making change
 
 * What is a merge conflict?
 A merge conflict is an error that can occur when merging either your current working branch with another branch or vice versa. This can occur for a variety of reasons like when changes are made to the same file and are trying to be merged.
+
