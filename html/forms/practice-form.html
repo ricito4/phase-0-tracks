@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Practice Form</title>
+</head>
+<body>
+	<h1>Feedback on Assignment 2.4</h1>
+	<form name="practice form" action="success.html">
+	<fieldset>
+		<div>
+			<label>Names of Participants:</label>
+			<input type="text" name="participantname">
+		</div>
+		<div>
+			<label>Date Completed:</label>
+			<input type="date" name="date">
+		</div>
+		<div>
+			<label>Location:</label>
+			<input type="text" name="location">
+		</div>	
+	</fieldset>
+	<fieldset>
+		<div>
+			<label>Level of Success:</label>
+			<select name="success">
+				<option value="Very Successful">Very Successful</option>
+				<option value="Very Successful">Successful</option>
+				<option value="Very Successful">Neutral</option>				
+				<option value="Very Successful">Unsuccessful</option>			
+				<option value="Very Successful">Very Unsuccessful</option>
+			</select>			
+		</div>
+		<div>
+			<textarea rows="4" cols="50" name="feedback" form="practice form">Leave Feedback Here...</textarea>
+		</div>
+		
+		<p>Did you enjoy the assignment?</p>
+		
+		<div>
+			<input type="radio" name="enjoyment" value="yes">Yes<br>
+			<input type="radio" name="enjoyment" value="no">No<br>
+			<input type="radio" name="enjoyment" value="maybe">Maybe<br>
+		</div>
+	</fieldset>
+	<button type="submit">Submit Feedback</button>
+	</form>
+</body>
+</html>
