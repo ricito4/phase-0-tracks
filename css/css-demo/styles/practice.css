@@ -1,0 +1,21 @@
+#contact-info {
+    font-size: .8em;
+}
+
+.job {
+    border-radius: 20px;
+    background-color: #e9e5dc;
+    padding-top: 5px;
+}
+
+.accomplishments {
+    font-size: .8em;
+}
+
+.experience-category:hover {
+    color: red;
+}
+
+.job h3 {
+    color: green;
+}
