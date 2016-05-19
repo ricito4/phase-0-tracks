@@ -1,6 +1,10 @@
+
+
 body {
   max-width: 960px;
   min-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .side-by-side {
@@ -32,8 +36,7 @@ cite {
   vertical-align: top;
   list-style-type: none;
   padding-left: 0px;
-  width: 20%;
-
+  width: 100%;
 }
 
 /* you're welcome to edit the
@@ -52,4 +55,40 @@ figcaption {
   font-style: italic;
   text-align: right;
 }
+
+
+
+/*@media screen and (max-width: 500px) {
+  body {
+    background-color: hotpink;
+  }
+}*/
+
+
+@media screen and (max-width: 500px) {
+  body {
+    font-size: 1.5em;
+  }
+
+  .side-by-side {
+  display: block;
+  }
+
+  #main-content {
+  vertical-align: top;
+  width: 90%;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  }
+  #external-links ul {
+  vertical-align: top;
+  list-style-type: none;
+  padding-left: 0px;
+  width: 10%;
+  }
+}
+
+
+
+
 
