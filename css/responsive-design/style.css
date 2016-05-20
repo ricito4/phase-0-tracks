@@ -1,6 +1,6 @@
 body {
   max-width: 960px;
-  min-width: 500px;
+  min-width: 200px;
 }
 
 .side-by-side {
@@ -36,6 +36,7 @@ cite {
 
 }
 
+
 /* you're welcome to edit the
 image, figure, and figcaption CSS if you'd like, 
 but it's optional! */
@@ -53,3 +54,23 @@ figcaption {
   text-align: right;
 }
 
+@media screen and (max-width: 500px) {
+  body {
+  }
+
+  .side-by-side {
+    display: block;
+  }
+
+  #main-content {
+    vertical-align: top;
+    padding-right: 20px;
+    padding-bottom: 20px;
+  }
+  #external-links ul {
+    vertical-align: top;
+    list-style-type: none;
+    padding-left: 0px;
+    width: 10%;
+  }
+}
