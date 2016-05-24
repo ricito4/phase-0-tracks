@@ -1,0 +1,66 @@
+Elevator
+- Approach elevator
+	-Scan for elevator
+	-Position body in front of elvator
+- Scan to see if elevator door is open or closed
+	-While elevator door is closed
+		-Scan for outside elevator buttons
+			-If buttons are too far
+				-Position body in front of outside elevator buttons
+				-Press elevator button for input type up/down
+				-Return to previous position
+			-Else
+				- Press elevator button for input type up/down
+- Enter elevator chamber
+	-Scan perimeter to check if body is inside elevator
+		-During scan look for inside elevator buttons
+- Position body in front of inside elevator buttons
+- Press and hold the open button
+- Initial input of complete set to no
+-While complete is still no
+	- Ask for floor number to be pushed
+	- Gather data for voice input for 3 seconds
+	- Add floor number to an array
+	- Scan for corresponding button
+	- Press corresponding button
+	- Announce floor numbers pushed in array
+	- Ask for additional floors
+	- Gather data for voice input for 3 seconds
+		-If no voice input data
+			-change complete to yes
+- Remove pressure from open button
+- Scan for close button
+- Press close button
+- Scan for current floor number
+	- When current floor number matches first input floor
+		-people in the way value is yes
+		-While this value is still yes
+			-Scan area for people and elevator door
+			-If people are blocking path to door
+				-ask politely for them to move
+			-else
+				people in the way value becomes no
+- Position body in front of elevator door
+-While door is close
+	- Scan to see if elevator door is open
+		- if open change value to open
+- Position body outside of elevator
+- Scan to see if outside of elevator
+- Adjust body to clear elevator
+
+Pour glass of water given a pitcher and cup
+- Scan for positions of pitcher and cup
+- Pick up pitcher
+- Pick up water cup
+- Scan orientation of pitcher tip and cup
+- Position tip adjesant to cup body and raise tip 2 inches higher than cup top
+- Scan and set a position for desired water volume on cup
+- Start continious scan
+- While water level lower than desired water volume
+	- Tilt water pitcher x degrees away from cup about point of contact at top of the cup
+		-If water level is not increasing
+			-Tilt at x degrees + y
+- Stop scan
+- Return pitcher back to initial orientation 
+
+
