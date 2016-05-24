@@ -48,3 +48,19 @@ Elevator
 - Scan to see if outside of elevator
 - Adjust body to clear elevator
 
+Pour glass of water given a pitcher and cup
+- Scan for positions of pitcher and cup
+- Pick up pitcher
+- Pick up water cup
+- Scan orientation of pitcher tip and cup
+- Position tip adjesant to cup body and raise tip 2 inches higher than cup top
+- Scan and set a position for desired water volume on cup
+- Start continious scan
+- While water level lower than desired water volume
+	- Tilt water pitcher x degrees away from cup about point of contact at top of the cup
+		-If water level is not increasing
+			-Tilt at x degrees + y
+- Stop scan
+- Return pitcher back to initial orientation 
+
+
