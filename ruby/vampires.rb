@@ -1,16 +1,16 @@
 def questioning
 	puts "How many times should the survey be taken?"
 	times= gets.to_i
-
+		for i in 1..times
 		puts "What is your name?"
 		name= gets.chomp
 		puts "How old are you?"
 		age= gets.to_i
 		puts "What year were you born?"
 		year= gets.to_i
-		puts "Our company cafeteria serves garlic bread. Should we order some for you? (Yes or No)"
+		puts "Our company cafeteria serves garlic bread. Should we order some for you?"
 		bread= gets.chomp
-		puts= "Would you like to enroll in the company’s health insurance? (Yes or No)"
+		puts "Would you like to enroll in the company’s health insurance?"
 		insure= gets.chomp
 
 		response= "Results inconclusive"
@@ -37,6 +37,7 @@ def questioning
 			response = "Definitely a vampire."
 		end
 		puts name + ": " + response
+	end
 
 end
 
