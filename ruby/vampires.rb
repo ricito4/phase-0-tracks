@@ -22,7 +22,7 @@ def questioning
 				valid_name= true
 			end
 		end
-puts "#{name.downcase}"
+
 		# Asks for age
 		puts "How old are you?"
 		until valid_age
