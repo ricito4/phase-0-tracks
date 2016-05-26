@@ -44,25 +44,24 @@ def questioning
 			# Condition 1
 			if (age == calculated_age || age == calculated_age-1) && (bread== "Yes" || insure== "Yes")
 				response = "Probably not a vampire."
-			end
-			
+	
 			# Condition 2
-			if (age > calculated_age || age < calculated_age-1) && (bread== "No" || insure== "No")
+			elsif (age > calculated_age || age < calculated_age-1) && (bread== "No" || insure== "No")
 				response = "Probably a vampire."
-			end
-
+	
 			# Condition 3
-			if (age > calculated_age || age < calculated_age-1) && (bread== "No" && insure== "No")
+			elsif (age > calculated_age || age < calculated_age-1) && (bread== "No" && insure== "No")
 				response = "Almost certainly a vampire."
-			end
 
 			# Condition 4
-			if name == "Drake Cula" || name== "Tu Fang"
+			elsif name == "Drake Cula" || name== "Tu Fang"
 				response = "Definitely a vampire."
 			end
 		end
-			puts name + ": " + response
+		# Outputs results of our conditions
+		puts name + ": " + response
 	end
+# Outputs apology
 puts "Actually, never mind! What do these questions have to do with anything? Let's all be friends."
 end
 
