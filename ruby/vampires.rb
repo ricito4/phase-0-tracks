@@ -1,37 +1,95 @@
 def questioning
 	# number of times to take survey
-	puts "How many times should the survey be taken?"
+	puts "How many times should the survey be taken? (1, 2... etc)"
 	times= gets.to_i
 	# loop for give amount of times
 	for i in 1..times
-		puts "What is your name?"
-		name= gets.chomp
-		puts "How old are you?"
-		age= gets.to_i
-		puts "What year were you born?"
-		year= gets.to_i
-		puts "Our company cafeteria serves garlic bread. Should we order some for you? (Yes or No)"
-		bread= gets.chomp
-		puts "Would you like to enroll in the company’s health insurance? (Yes or No)"
-		insure= gets.chomp
+		# valid response checkers
+		valid_name= false
+		valid_age= false
+		valid_year= false
+		valid_bread= false
+		valid_insure= false
+		finish_allergy= false
 		
-		# initialize variables to use for loops
-		finished= "no"
-		sign= "no"
-		# ask for allergies 1 at a time, Checks to see if sunshine is one
-		while finished != "done"
-			puts "Do you have any allergies? If so list 1 at a time in lowercase please!"
-			allergy= gets.chomp
-			
-			if allergy == "sunshine"
-				sign= "yes"
+		# Asks for name
+		puts "What is your name?"
+		until valid_name
+			name= gets.chomp
+			if name == ""
+				puts "Please enter your name"
+			else
+				valid_name= true
 			end
-			
-			puts "Are you finished? (type 'done' if finished)"
-			finished= gets.chomp
-
+		end
+puts "#{name.downcase}"
+		# Asks for age
+		puts "How old are you?"
+		until valid_age
+			age= gets.chomp
+			if age == ""
+				puts "Please enter your age"
+			else
+				age= age.to_i
+				valid_age= true
+			end
 		end
 
+		# Asks for year of birth
+		puts "What year were you born?"
+		until valid_year
+			year= gets.chomp
+			if year== ""
+				puts "Please enter your year of birth"
+			else
+				year= year.to_i
+				valid_year= true
+			end
+		end
+
+		# Asks if they want garlic bread
+		puts "Our company cafeteria serves garlic bread. Should we order some for you? (y/n)"		
+		until valid_bread
+			bread= gets.chomp
+			if bread == 'y' || bread == 'n'
+				valid_bread= true
+			else
+				puts "This is not a valid response"
+			end
+		end
+		
+		# Asks if they want health insurance
+		puts "Would you like to enroll in the company’s health insurance? (y/n)"	
+		until valid_insure
+			insure= gets.chomp
+			if insure == 'y' || insure == 'n'
+				valid_insure= true
+			else
+				puts "This is not a valid response"
+			end
+		end
+
+		# Checks allergies for sunshine
+		sign= "no"
+		puts "Do you have any allergies? (y/n)"
+		until finish_allergy
+			allergy_question=gets.chomp
+			if allergy_question == 'n'
+				finish_allergy = true
+			elsif allergy_question == 'y'
+				puts "Please list what allergy you have"
+				allergy=gets.chomp
+				allergy=allergy.downcase
+				if allergy == "sunshine"
+					sign= "yes"
+				end
+				puts "Do you have any other allergies? (y/n)"
+			else 
+				puts "This is not a valid response"
+			end
+		end
+
+		
 		# variables used for conditions
 		response= "Results inconclusive"
 		calculated_age= 2016-year
@@ -42,19 +100,19 @@ def questioning
 		else
 			# 2 conditions for age since maybe their birthday has not occured this year
 			# Condition 1
-			if (age == calculated_age || age == calculated_age-1) && (bread== "Yes" || insure== "Yes")
+			if (age == calculated_age || age == calculated_age-1) && (bread== "y" || insure== "y")
 				response = "Probably not a vampire."
-	
+			end
 			# Condition 2
-			elsif (age > calculated_age || age < calculated_age-1) && (bread== "No" || insure== "No")
+			if (age > calculated_age || age < calculated_age-1) && (bread== "n" || insure== "n")
 				response = "Probably a vampire."
-	
+			end
 			# Condition 3
-			elsif (age > calculated_age || age < calculated_age-1) && (bread== "No" && insure== "No")
+			if (age > calculated_age || age < calculated_age-1) && (bread== "n" && insure== "n")
 				response = "Almost certainly a vampire."
-
+			end
 			# Condition 4
-			elsif name == "Drake Cula" || name== "Tu Fang"
+			if name.downcase == "drake cula" || name.downcase== "tu fang"
 				response = "Definitely a vampire."
 			end
 		end
