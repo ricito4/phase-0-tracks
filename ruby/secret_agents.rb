@@ -6,16 +6,24 @@ counter= 0
 final_word=""
 # lowercase and uppercase alphabet for referencing letters before and after 
 alphabet_lower="abcdefghijklmnopqrstuvwxyz"
-alphabet_upper="ABCEDEFGHIJKLMNOPQRSTUVWXYZ"
+alphabet_upper="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 # loop through until the end of the string
 while counter < string1.length
 	# search for index of the current letter in alphabet
 	letter= string1[counter]
-	index_alph=alphabet.index(letter)
-		# condition for the letter z
+	index_alph=alphabet_lower.index(letter)
+	
+	# Check if the character given not lowercase and if uppercase change variables used
+	if index_alph== nil
+		alphabet= alphabet_upper
+		index_alph=alphabet.index(letter)
+	else
+		alphabet= alphabet_lower
+	end
+		# condition for the letter z or Z
 		if index_alph == 25
-			letter= "a"
+			letter= alphabet[index_alph-25]
 		# condition to catch all other letters they return as nil otherwise
 		elsif index_alph != nil
 			letter= alphabet[index_alph+1]
@@ -36,17 +44,26 @@ def decrypt(string1)
 counter= 0
 final_word=""
 # lowercase and uppercase alphabet for referencing letters before and after 
-alphabet= "abcdefghijklmnopqrstuvwxyz"
-alphabet_upper="ABCEDEFGHIJKLMNOPQRSTUVWXYZ"
+alphabet_lower="abcdefghijklmnopqrstuvwxyz"
+alphabet_upper="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 # loop through until the end of the string
 while counter < string1.length
 	# search for index of the current letter in alphabet
 	letter= string1[counter]
-	index_alph=alphabet.index(letter)
-		# condition for the letter a
+	index_alph=alphabet_lower.index(letter)
+	
+	# Check if the character given not lowercase and if uppercase change variables used
+	if index_alph== nil
+		alphabet= alphabet_upper
+		index_alph=alphabet.index(letter)
+	else
+		alphabet= alphabet_lower
+	end
+
+		# condition for the letter a or A
 		if index_alph == 0
-			letter= "z"
+			letter= alphabet[index_alph+25]
 		# condition to catch all other letters, they return as nil otherwise
 		elsif index_alph != nil
 			letter= alphabet[index_alph-1]
