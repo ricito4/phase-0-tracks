@@ -69,7 +69,7 @@ def questioning
 				puts "This is not a valid response"
 			end
 		end
-		
+
 		# Checks allergies for sunshine
 		sign= "no"
 		puts "Do you have any allergies? (y/n)"
@@ -80,6 +80,7 @@ def questioning
 			elsif allergy_question == 'y'
 				puts "Please list what allergy you have"
 				allergy=gets.chomp
+				allergy=allergy.downcase
 				if allergy == "sunshine"
 					sign= "yes"
 				end
@@ -112,7 +113,7 @@ def questioning
 				response = "Almost certainly a vampire."
 
 			# Condition 4
-			elsif name == "Drake Cula" || name== "Tu Fang"
+			elsif name.downcase == "drake cula" || name.downcase== "tu fang"
 				response = "Definitely a vampire."
 			end
 		end
