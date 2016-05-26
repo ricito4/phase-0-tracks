@@ -19,11 +19,10 @@ def questioning
 			if name == ""
 				puts "Please enter your name"
 			else
-				name= name.capitalize
 				valid_name= true
 			end
 		end
-
+puts "#{name.downcase}"
 		# Asks for age
 		puts "How old are you?"
 		until valid_age
@@ -103,17 +102,17 @@ def questioning
 			# Condition 1
 			if (age == calculated_age || age == calculated_age-1) && (bread== "y" || insure== "y")
 				response = "Probably not a vampire."
-	
+			end
 			# Condition 2
-			elsif (age > calculated_age || age < calculated_age-1) && (bread== "n" || insure== "n")
+			if (age > calculated_age || age < calculated_age-1) && (bread== "n" || insure== "n")
 				response = "Probably a vampire."
-	
+			end
 			# Condition 3
-			elsif (age > calculated_age || age < calculated_age-1) && (bread== "n" && insure== "n")
+			if (age > calculated_age || age < calculated_age-1) && (bread== "n" && insure== "n")
 				response = "Almost certainly a vampire."
-
+			end
 			# Condition 4
-			elsif name.downcase == "drake cula" || name.downcase== "tu fang"
+			if name.downcase == "drake cula" || name.downcase== "tu fang"
 				response = "Definitely a vampire."
 			end
 		end
