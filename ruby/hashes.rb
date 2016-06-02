@@ -1,13 +1,14 @@
 def design_things
-	#initialize hash
+	# Initialize hash
 	client= {}
+	# Ask for inputs and store them in client
 	puts "What is your name?"
 	client[:name]= gets.chomp
 	puts "How old are you?"
 	client[:age]= gets.to_i
 	puts "Do you like cats? (y/n)"
 	cat= gets.chomp
-	# change the given values to true, false or nil
+	# Change the given values to true, false or nil
 	if cat == 'y'
 		client[:cats]= true
 	elsif cat == 'n'
@@ -32,20 +33,17 @@ def design_things
 		p variant
 		puts "What would you like to change #{variant} to?"
 		
-		#Strings
+		# Strings
 		if variant == :name || variant == :blue
 			client[variant]= gets.chomp
-			p "Strings change"
 		
-		#Integers
+		# Integers
 		elsif variant == :age || variant == :children
 			client[variant]= gets.to_i
-			p "int change"
 		
-		#Booleans
+		# Booleans
 		elsif variant== :cats
 			change= gets.chomp
-			p "Bool change"
 			if change == "true"
 				client[variant]= true
 			elsif change == "false"
@@ -69,5 +67,8 @@ design_things
 # Store it in the hash with the corresponding key
 # Print the has when finished
 # Ask if they want to change something, none if they don't
-# if they do ask them to input which key as a string
-# Convert it to a symbol and 
+# If they do ask them to input which key as a string
+# Convert it to a symbol and ask what they want to change it to
+# Update client based on whether the key was a string integer or boolean
+# If none or different key referenced skip
+# Prints the updated list
