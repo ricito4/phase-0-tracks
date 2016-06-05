@@ -5,14 +5,16 @@
 # Define a method that compares each letter to different alphabets then returns what alphabet it applies to, 
 # the index in that alphabet of the letter and whether the alphabet is upper or lowercase
 # Compare each letter to the returned array if the index is not nil
-# Change the letter to the next letter, if the letter is z or Z change it to a or A
-# after looping combine the array
-# Store both in an array
+# Change the letter to the next letter, if the letter is z, Z, u or U change it correctly
+# After looping combine the array
+# Store both this array and the original name in a hash as an array
+# Ask if they want to continue inputting names, (make this method recursive)
+# Iterate through the hash to print who is what alias
 
-
+# Initialize variable for looping
 complete= false
 name_hash= {}
-count=0
+count=1
 
 until complete
 
@@ -99,6 +101,7 @@ until complete
 					# condition to change z
 					if letter == 'z'
 						current_name[i]= 'b'
+					# condition to change u
 					elsif letter == 'u'
 						current_name[i]= 'a'
 					else
@@ -110,6 +113,7 @@ until complete
 					# condition to change Z
 					if letter == 'Z'
 						current_name[i]= 'B'
+					# condition to change U
 					elsif letter == 'U'
 						current_name[i]= 'A'
 					else
@@ -127,22 +131,32 @@ until complete
 	# Join together the arrays into 1 string
 	p the_alias =name_array.join(" ")
 
-	name_hash.merge!({"Real Name #{count}" => full_name, "Alias #{count}" => the_alias})
+	# Store the name and alias in the hash and update the count
+	name_hash.merge!({"#{count}" => [full_name, the_alias]})
 	count+= 1
 
+	# reset valid response
 	valid = false
-	puts "Do you want to quit or continue putting in names? (quit/continue)"
+	# Ask user if they want to continue or quit
+	puts "Do you want to continue putting in names or quit? (yes/quit)"
 	until valid
 		answer= gets.chomp
+		# Stop asking
 		if answer == 'quit'
 			complete= true
 			valid= true
-		elsif answer == 'continue'
+		# Iterate through again
+		elsif answer == 'yes'
 			valid= true
+		# Not a valid response
 		else
 			puts "This is an invalid response"
 		end
 
 	end
 end
-p name_hash
+
+# Iterate through the created hash to print who is what alias
+name_hash.each do |number, both_names|
+	p "#{both_names[0]} is also known as #{both_names[1]}"
+end
