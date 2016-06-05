@@ -9,7 +9,7 @@
 
 puts "Please enter Full Name"
 full_name= gets.chomp
-p name_array= full_name.split(' ')
+name_array= full_name.split(' ')
 number= name_array.length
 
 # Method to advance each name 1 index to the left and wrap around
@@ -66,7 +66,6 @@ def theCase(letter,up_consonants,up_vowels,low_consonants,low_vowels)
 		end
 	end
 	return_hash[:index]= index_letter
-	p return_hash
 	return return_hash
 	
 
@@ -75,9 +74,9 @@ end
 name_array.map! do |eachname|
 	current_name=eachname.split('')
 	index_name= current_name.length
-	for i in 0..index_name
+	for i in 0..index_name-1
 		letter= current_name[i]
-		#p hash_used= theCase(letter,upper_consonant,upper_vowel,lower_consonant,lower_vowel)
+		p hash_used= theCase(letter,upper_consonant,upper_vowel,lower_consonant,lower_vowel)
 	end
 
 
