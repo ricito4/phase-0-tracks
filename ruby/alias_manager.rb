@@ -7,6 +7,8 @@
 # after looping combine the array
 # return array
 
+complete= false
+# Ask for name and gather input
 puts "Please enter Full Name"
 full_name= gets.chomp
 name_array= full_name.split(' ')
@@ -34,7 +36,7 @@ lower_consonant="bcdfghjklmnpqrstvwxyz"
 
 def theCase(letter,up_consonants,up_vowels,low_consonants,low_vowels)
 	# initial hash to return
-	return_hash= {which_case: "none", alphabet: "none", index: 0}
+	return_hash= {which_case: "none", alphabet: "none", index: nil}
 	
 	# Change if letter is upper vowel
 	index_letter= up_vowels.index(letter)
@@ -74,11 +76,32 @@ end
 name_array.map! do |eachname|
 	current_name=eachname.split('')
 	index_name= current_name.length
+	
 	for i in 0..index_name-1
 		letter= current_name[i]
-		p hash_used= theCase(letter,upper_consonant,upper_vowel,lower_consonant,lower_vowel)
-	end
+		# Call method
+		hash_used= theCase(letter,upper_consonant,upper_vowel,lower_consonant,lower_vowel)
+		
+		if hash_used[:index] != nil
+			if hash_used[:which_case]== "lower"
+				if letter == 'z'
+					current_name[i]= 'a'
+				else
+					current_name[i]= hash_used[:alphabet][hash_used[:index]+1]
+				end
+			elsif hash_used[:which_case]== "upper"
+				if letter == 'Z'
+					current_name[i]= 'A'
+				else
+					current_name[i]= hash_used[:alphabet][hash_used[:index]+1]
+				end
+			end
 
+		end
+
+	end
+	eachname= current_name.join('')
 
 
 end
+p name_array.join(" ")
