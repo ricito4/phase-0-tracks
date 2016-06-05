@@ -40,7 +40,7 @@ until complete
 
 	# A method that takes a letter and compares it with 4 different alphabets
 	# It will return a hash with 3 elements:
-	# 1. Which case the letter is, none if there is none
+	# 1. Which case the letter is, nil if there is none
 	# 2. Which alphabet to iterate through
 	# 3. What index the letter occured at in the alphabet
 
@@ -135,17 +135,17 @@ until complete
 	name_hash.merge!({"#{count}" => [full_name, the_alias]})
 	count+= 1
 
-	# reset valid response
+	# Reset valid response
 	valid = false
 	# Ask user if they want to continue or quit
 	puts "Do you want to continue putting in names or quit? (yes/quit)"
 	until valid
 		answer= gets.chomp
-		# Stop asking
+		# Condition to stop asking and looping
 		if answer == 'quit'
 			complete= true
 			valid= true
-		# Iterate through again
+		# Condition to continue entering names
 		elsif answer == 'yes'
 			valid= true
 		# Not a valid response
