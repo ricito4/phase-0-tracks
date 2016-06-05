@@ -26,17 +26,49 @@ lower_vowel= "aeiou"
 upper_consonant="BCDFGHJKLMNPQRSTVWXYZ"
 lower_consonant="bcdfghjklmnpqrstvwxyz" 
 
-def Case(letter,up_consonants,up_vowels,low_consonants,low_vowels)
-	return_hash= {which_case: "", alphabet: "", index: 0}
+# A method that takes a letter and compares it with 4 different alphabets
+# It will return a hash with 3 elements:
+# 1. Which case the letter is, none if there is none
+# 2. Which alphabet to iterate through
+# 3. What index the letter occured at in the alphabet
+
+def theCase(letter,up_consonants,up_vowels,low_consonants,low_vowels)
+	# initial hash to return
+	return_hash= {which_case: "none", alphabet: "none", index: 0}
+	
+	# Change if letter is upper vowel
 	index_letter= up_vowels.index(letter)
 	if index_letter != nil
-		
-	else
-		index_letter= consonants.index(letter)
-		if index_letter != nil
-			upper= true
-		end
+		return_hash[:which_case]= "upper"
+		return_hash[:alphabet]= up_vowels
 
+	else
+		# Change if letter is upper consonant
+		index_letter= up_consonants.index(letter)
+		if index_letter != nil
+			return_hash[:which_case]= "upper"
+			return_hash[:alphabet]= up_consonants
+		else
+			# Change if letter is lower vowel
+			index_letter= low_vowels.index(letter)
+			if index_letter != nil
+				return_hash[:which_case]= "lower"
+				return_hash[:alphabet]= low_vowels
+			else
+				
+				# Change if letter is lower consonant
+				index_letter= low_consonants.index(letter)
+				if index_letter != nil
+					return_hash[:which_case]= "lower"
+					return_hash[:alphabet]= low_consonants
+				end
+			end
+		end
+	end
+	return_hash[:index]= index_letter
+	p return_hash
+	return return_hash
+	
 
 end
 
@@ -45,22 +77,8 @@ name_array.map! do |eachname|
 	index_name= current_name.length
 	for i in 0..index_name
 		letter= current_name[i]
-		index_string= lower_vowel.index(letter)
-		
-		if index_string== nil
-			index_string= lower_consonant.index(letter)
-			
-			if index_string== nil
-			index_string= upper_vowel.index(letter)
-				
-				if index_string== nil
-					index_string= upper_consonant.index(letter)
-				end
-			end
-		end
-		if index_string != nil
-
-		end
+		#p hash_used= theCase(letter,upper_consonant,upper_vowel,lower_consonant,lower_vowel)
+	end
 
 
 
