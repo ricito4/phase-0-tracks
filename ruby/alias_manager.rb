@@ -26,9 +26,42 @@ lower_vowel= "aeiou"
 upper_consonant="BCDFGHJKLMNPQRSTVWXYZ"
 lower_consonant="bcdfghjklmnpqrstvwxyz" 
 
+def Case(letter,up_consonants,up_vowels,low_consonants,low_vowels)
+	return_hash= {which_case: "", alphabet: "", index: 0}
+	index_letter= up_vowels.index(letter)
+	if index_letter != nil
+		
+	else
+		index_letter= consonants.index(letter)
+		if index_letter != nil
+			upper= true
+		end
+
+
+end
+
 name_array.map! do |eachname|
 	current_name=eachname.split('')
-	index= current_name.length
+	index_name= current_name.length
+	for i in 0..index_name
+		letter= current_name[i]
+		index_string= lower_vowel.index(letter)
+		
+		if index_string== nil
+			index_string= lower_consonant.index(letter)
+			
+			if index_string== nil
+			index_string= upper_vowel.index(letter)
+				
+				if index_string== nil
+					index_string= upper_consonant.index(letter)
+				end
+			end
+		end
+		if index_string != nil
+
+		end
+
 
 
 end
