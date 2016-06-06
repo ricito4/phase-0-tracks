@@ -15,51 +15,58 @@
 # A method that takes a letter and compares it with 4 different alphabets
 # It will return a hash with 3 elements:
 # 1. Which case the letter is, nil if there is none
-# 2. Which alphabet to iterate through
-# 3. What index the letter occured at in the alphabet
+# 2. What index the letter occured at in the alphabet. Useful for catching other symbols
 
 def the_case(letter)
-	upper_vowel= "AEIOU"
-	lower_vowel= "aeiou"
-	upper_consonant="BCDFGHJKLMNPQRSTVWXYZ"
-	lower_consonant="bcdfghjklmnpqrstvwxyz" 
+	alphabet="abcdefghijklmnopqrstuvwxyz" 
 
 	# initial hash to return
-	return_hash= {which_case: "none", alphabet: "none", index: nil}
+	return_hash= {which_case: "none", index: nil}
 	
 	# Change if letter is upper vowel
-	index_letter= upper_vowel.index(letter)
+	index_letter= alphabet.index(letter)
 	if index_letter != nil
-		return_hash[:which_case]= "upper"
-		return_hash[:alphabet]= upper_vowel
-
+		return_hash[:which_case]= "lower"
 	else
-		# Change if letter is upper consonant
-		index_letter= upper_consonant.index(letter)
+		index_letter= alphabet.swapcase.index(letter)
 		if index_letter != nil
 			return_hash[:which_case]= "upper"
-			return_hash[:alphabet]= upper_consonant
-		else
-			# Change if letter is lower vowel
-			index_letter= lower_vowel.index(letter)
-			if index_letter != nil
-				return_hash[:which_case]= "lower"
-				return_hash[:alphabet]= lower_vowel
-			else
-				
-				# Change if letter is lower consonant
-				index_letter= lower_consonant.index(letter)
-				if index_letter != nil
-					return_hash[:which_case]= "lower"
-					return_hash[:alphabet]= lower_consonant
-				end
-			end
 		end
 	end
 	# Sets the index number, nil if none
 	return_hash[:index]= index_letter
 	return return_hash
 end
+
+def case_changer(letter,what_case,index)
+	letter.downcase!
+	
+	if letter == 'a'
+		letter = 'e'
+	elsif letter == 'e'
+		letter= 'i'
+	elsif letter == 'i'
+		letter= 'o'
+	elsif letter == 'o'
+		letter= 'u'
+	elsif letter == 'u'
+		letter= 'a'
+	elsif letter == 'y'
+		letter = 'b'
+	elsif letter== 'd' || letter == 'h' || letter == 'n' || letter == 't'
+		letter.next!.next!
+	elsif index != nil
+		letter.next!
+	end
+	
+	if what_case == "upper"
+		letter.upcase!
+	end
+	
+	return letter
+end
+
+		
 
 # Initialize variable for looping
 complete= false
@@ -96,35 +103,7 @@ until complete
 			# Call method to return which alphabet, case and index to use
 			hash_used= the_case(letter)
 			
-			# If the chracter is a letter
-			if hash_used[:index] != nil
-				# If character is lowercase
-				if hash_used[:which_case]== "lower"
-					# condition to change z
-					if letter == 'z'
-						current_name[i]= 'b'
-					# condition to change u
-					elsif letter == 'u'
-						current_name[i]= 'a'
-					else
-						# condition to change a-y
-						current_name[i]= hash_used[:alphabet][hash_used[:index]+1]
-					end
-				# If character is uppercase
-				elsif hash_used[:which_case]== "upper"
-					# condition to change Z
-					if letter == 'Z'
-						current_name[i]= 'B'
-					# condition to change U
-					elsif letter == 'U'
-						current_name[i]= 'A'
-					else
-						# condition to change A-Y
-						current_name[i]= hash_used[:alphabet][hash_used[:index]+1]
-					end
-				end
-
-			end
+			current_name[i]= case_changer(letter,hash_used[:which_case],hash_used[:index])
 
 		end
 		# Join the current array of characters together
