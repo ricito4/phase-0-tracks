@@ -2,8 +2,7 @@
 # Split the name up by spaces
 # Advance each name to the left by 1 and wrap around
 # Split names up into arrays with each letter as 1 element
-# Define a method that compares each letter to different alphabets then returns what alphabet it applies to, 
-# the index in that alphabet of the letter and whether the alphabet is upper or lowercase
+# Define a method that compares each letter and returns if it is a letter via it's index and what case is used 
 # Compare each letter to the returned array if the index is not nil
 # Change the letter to the next letter, if the letter is z, Z, u or U change it correctly
 # After looping combine the array
@@ -11,74 +10,11 @@
 # Ask if they want to continue inputting names, (make this method recursive)
 # Iterate through the hash to print who is what alias
 
-
-# A method that takes a letter and compares it with 4 different alphabets
-# It will return a hash with 3 elements:
-# 1. Which case the letter is, nil if there is none
-# 2. What index the letter occured at in the alphabet. Useful for catching other symbols
-
-def the_case(letter)
-	alphabet="abcdefghijklmnopqrstuvwxyz" 
-
-	# initial hash to return
-	return_hash= {which_case: "none", index: nil}
+# A method that splits up a full name into separate strings and switches them around
+# Returns a name array with names switched
 	
-	# Change if letter is upper vowel
-	index_letter= alphabet.index(letter)
-	if index_letter != nil
-		return_hash[:which_case]= "lower"
-	else
-		index_letter= alphabet.swapcase.index(letter)
-		if index_letter != nil
-			return_hash[:which_case]= "upper"
-		end
-	end
-	# Sets the index number, nil if none
-	return_hash[:index]= index_letter
-	return return_hash
-end
-
-def case_changer(letter,what_case,index)
-	letter.downcase!
-	
-	if letter == 'a'
-		letter = 'e'
-	elsif letter == 'e'
-		letter= 'i'
-	elsif letter == 'i'
-		letter= 'o'
-	elsif letter == 'o'
-		letter= 'u'
-	elsif letter == 'u'
-		letter= 'a'
-	elsif letter == 'y'
-		letter = 'b'
-	elsif letter== 'd' || letter == 'h' || letter == 'n' || letter == 't'
-		letter.next!.next!
-	elsif index != nil
-		letter.next!
-	end
-	
-	if what_case == "upper"
-		letter.upcase!
-	end
-	
-	return letter
-end
-
-		
-
-# Initialize variable for looping
-complete= false
-name_hash= {}
-count=1
-
-until complete
-
-	# Ask for name and gather input
-	puts "Please enter Full Name"
-	full_name= gets.chomp
-	name_array= full_name.split(' ')
+def name_changer(name)
+	name_array= name.split(' ')
 	number= name_array.length
 
 	# Method to advance each name 1 index to the left and wrap around
@@ -89,27 +25,99 @@ until complete
 			name_array[index+1]= temp
 		end
 	end
+	return name_array
+end
+
+# A method that takes a single character string checks if it's upper or lower case 
+# and advances it by an appropriate character and returns it
+# Vowels are advanced as vowels: A-> E -> I ... etc
+# Consonants are advanced as consonants C -> D -> F ... etc
+# U and Z loop back to A and B
+
+def letter_advancer(letter)
+
+	alphabet="abcdefghijklmnopqrstuvwxyz" 
+
+	# initial hash to return
+	case_string= "not upper"
+	
+	# Check to see if the letter is upper case, if it is lower or a symbol continue normally
+	index_letter= alphabet.index(letter)
+	if index_letter == nil
+		index_letter= alphabet.swapcase.index(letter)
+		if index_letter != nil
+			case_string= "upper"
+		end
+	end
+
+	# Convert the letter to downcase to improve efficiency
+	letter.downcase!
+	
+	# Conditions for vowels or end of alphabet
+	if letter == 'a'
+		letter = 'e'
+	elsif letter == 'e'
+		letter= 'i'
+	elsif letter == 'i'
+		letter= 'o'
+	elsif letter == 'o'
+		letter= 'u'
+	elsif letter == 'u'
+		letter= 'a'
+	elsif letter == 'z'
+		letter = 'b'
+	# If the next letter would be a vowel
+	elsif letter== 'd' || letter == 'h' || letter == 'n' || letter == 't'
+		letter.next!.next!
+	# All other letters that are not symbols
+	else
+		letter.next!
+	end
+	# if the letter was upper case change it back
+	if case_string == "upper"
+		letter.upcase!
+	end
+	
+	return letter
+end
 
 
-	# iterate through each string in this array
+# Driver Program to loop through asking for names to change until finished
+# Initialize variable for looping
+complete= false
+name_hash= {}
+count=1
+
+until complete
+
+	# Ask for name and gather input
+	puts "Please enter Full Name"
+	full_name= gets.chomp
+
+	# Call method name_changer to split the name up and switch it around
+	name_array= name_changer(full_name)
+
+	# iterate through each name in name_array
 	name_array.map! do |eachname|
 		# Split each string up into an array of single characters and find the length for iteration
 		current_name=eachname.split('')
 		index_length= current_name.length
-		
-		# loop through each character
-		for i in 0..index_length-1
-			letter= current_name[i]
-			# Call method to return which alphabet, case and index to use
-			hash_used= the_case(letter)
+
+		# iterate through each letter in the current array
+		current_name.each_with_index do |letter,index|
+			if index < index_length
+				letter= current_name[index]
 			
-			current_name[i]= case_changer(letter,hash_used[:which_case],hash_used[:index])
+				# Call method to advance each letter			
+				current_name[index]= letter_advancer(letter)
+			end
 
 		end
 		# Join the current array of characters together
 		eachname= current_name.join('')
 	end
-	# Join together the arrays into 1 string
+
+	# Join together the arrays into 1 string and print it
 	p the_alias =name_array.join(" ")
 
 	# Store the name and alias in the hash and update the count
