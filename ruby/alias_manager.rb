@@ -11,6 +11,56 @@
 # Ask if they want to continue inputting names, (make this method recursive)
 # Iterate through the hash to print who is what alias
 
+
+# A method that takes a letter and compares it with 4 different alphabets
+# It will return a hash with 3 elements:
+# 1. Which case the letter is, nil if there is none
+# 2. Which alphabet to iterate through
+# 3. What index the letter occured at in the alphabet
+
+def the_case(letter)
+	upper_vowel= "AEIOU"
+	lower_vowel= "aeiou"
+	upper_consonant="BCDFGHJKLMNPQRSTVWXYZ"
+	lower_consonant="bcdfghjklmnpqrstvwxyz" 
+
+	# initial hash to return
+	return_hash= {which_case: "none", alphabet: "none", index: nil}
+	
+	# Change if letter is upper vowel
+	index_letter= upper_vowel.index(letter)
+	if index_letter != nil
+		return_hash[:which_case]= "upper"
+		return_hash[:alphabet]= upper_vowel
+
+	else
+		# Change if letter is upper consonant
+		index_letter= upper_consonant.index(letter)
+		if index_letter != nil
+			return_hash[:which_case]= "upper"
+			return_hash[:alphabet]= upper_consonant
+		else
+			# Change if letter is lower vowel
+			index_letter= lower_vowel.index(letter)
+			if index_letter != nil
+				return_hash[:which_case]= "lower"
+				return_hash[:alphabet]= lower_vowel
+			else
+				
+				# Change if letter is lower consonant
+				index_letter= lower_consonant.index(letter)
+				if index_letter != nil
+					return_hash[:which_case]= "lower"
+					return_hash[:alphabet]= lower_consonant
+				end
+			end
+		end
+	end
+	# Sets the index number, nil if none
+	return_hash[:index]= index_letter
+	return return_hash
+end
+
 # Initialize variable for looping
 complete= false
 name_hash= {}
@@ -25,62 +75,14 @@ until complete
 	number= name_array.length
 
 	# Method to advance each name 1 index to the left and wrap around
-	for i in 0..number-1
-		if i < number-1
-			temp= name_array[i]
-			name_array[i]=name_array[i+1]
-			name_array[i+1]= temp
+	name_array.each_with_index do |letter,index|
+		if index < number-1
+			temp= name_array[index]
+			name_array[index]=name_array[index+1]
+			name_array[index+1]= temp
 		end
 	end
 
-	upper_vowel= "AEIOU"
-	lower_vowel= "aeiou"
-	upper_consonant="BCDFGHJKLMNPQRSTVWXYZ"
-	lower_consonant="bcdfghjklmnpqrstvwxyz" 
-
-	# A method that takes a letter and compares it with 4 different alphabets
-	# It will return a hash with 3 elements:
-	# 1. Which case the letter is, nil if there is none
-	# 2. Which alphabet to iterate through
-	# 3. What index the letter occured at in the alphabet
-
-	def theCase(letter,up_consonants,up_vowels,low_consonants,low_vowels)
-		# initial hash to return
-		return_hash= {which_case: "none", alphabet: "none", index: nil}
-		
-		# Change if letter is upper vowel
-		index_letter= up_vowels.index(letter)
-		if index_letter != nil
-			return_hash[:which_case]= "upper"
-			return_hash[:alphabet]= up_vowels
-
-		else
-			# Change if letter is upper consonant
-			index_letter= up_consonants.index(letter)
-			if index_letter != nil
-				return_hash[:which_case]= "upper"
-				return_hash[:alphabet]= up_consonants
-			else
-				# Change if letter is lower vowel
-				index_letter= low_vowels.index(letter)
-				if index_letter != nil
-					return_hash[:which_case]= "lower"
-					return_hash[:alphabet]= low_vowels
-				else
-					
-					# Change if letter is lower consonant
-					index_letter= low_consonants.index(letter)
-					if index_letter != nil
-						return_hash[:which_case]= "lower"
-						return_hash[:alphabet]= low_consonants
-					end
-				end
-			end
-		end
-		# Sets the index number, nil if none
-		return_hash[:index]= index_letter
-		return return_hash
-	end
 
 	# iterate through each string in this array
 	name_array.map! do |eachname|
@@ -92,7 +94,7 @@ until complete
 		for i in 0..index_length-1
 			letter= current_name[i]
 			# Call method to return which alphabet, case and index to use
-			hash_used= theCase(letter,upper_consonant,upper_vowel,lower_consonant,lower_vowel)
+			hash_used= the_case(letter)
 			
 			# If the chracter is a letter
 			if hash_used[:index] != nil
