@@ -71,3 +71,29 @@ def print_list(groceries)
 end
 
 print_list(list)
+
+# Reflect Section
+# I learned that pseudo code can be more specific to what methods you 
+# would use and how you would implement them.
+
+# While an array might be easier to iterate through with easier syntax
+# the hash can reference specific items easier without looking for an 
+# index number
+
+# A method can return any value you want with a return statement. Without
+# one it will return the last line that was executed in the method
+
+# You can pass many different arguments as long as you reference them
+# correctly in the method. For example use string methods for a string arguement.
+
+# One way you could pass information is by storing it in a variable or data
+# structure and then calling that variable or data structure in another method.
+# Another way would be to call a method within a method.
+
+# I got more comfortable using ruby style iteration with .each to iterate through
+# hashes and arrays.
+
+# I just need to familiarize myself with ruby sytnax more. Understanding what methods
+# apply to what, and how to reference things in hashs.
+
+# I worked with Jacob Golding for this GPS
