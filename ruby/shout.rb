@@ -16,11 +16,12 @@ p Shout.yelling_happily("FREE FOOD")
 
 module Shout
 	def yell_angrily(words)
-    	words + "!!!" + " :("
+		words + "!!!" + " :("
 	end
+	
 	def yelling_happily(words)
 		words + "!!!" + " :D"
-  	end
+	end
 end
 
 class Speaker
