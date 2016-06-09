@@ -42,14 +42,6 @@ end
 
 reindeers= ["Rudolph", "Dasher", "Dancer", "Prancer", "Vixen", "Comet", "Cupid", "Donner", "Blitzen"]
 
-# Initialize an santa 1 instance of Santa to test methods
-santa_1 = Santa.new("robot","Plastic-Steel Composite",reindeers)
-santa_1.speak
-santa_1.eat_milk_and_cookies("SameSite cookie")
-
-p "This santa is now #{santa_1.celebrate_birthday} years old"
-p santa_1.get_mad_at("Rudolph")
-
 santas= []
 some_genders = ["genderless candy", "female", "single cell bacteria","n/a"]
 some_ethnicities = ["Blue sour-patch kid" "gingerbread person" "monochrome","n/a"]
@@ -59,3 +51,19 @@ some_genders.length.times do |index_number|
 	santas << Santa.new(some_genders[index_number],some_ethnicities[index_number],reindeers,some_ages[index_number])
 end
 p santas
+puts "----"
+
+# Initialize an santa 1 instance of Santa to test methods
+santa_1 = Santa.new("robot","Plastic-Steel Composite",reindeers)
+santa_1.speak
+santa_1.eat_milk_and_cookies("SameSite cookie")
+
+p "This santa is now #{santa_1.celebrate_birthday} years old"
+p santa_1.get_mad_at("Vixen")
+p santa_1.change_gender("android")
+p santa_1.getting_age
+p santa_1.getting_ethnicity
+
+
+
+
