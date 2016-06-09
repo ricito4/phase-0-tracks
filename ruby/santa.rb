@@ -1,4 +1,6 @@
 class Santa
+	attr_reader :age, :ethnicity
+	attr_accessor :gender
 	def initialize(given_gender,given_ethnicity,given_reindeer,given_age=0)
 		"Initializing Santa instance..."
 		@gender= given_gender
@@ -14,16 +16,7 @@ class Santa
 		p "That was a good #{cookie}!"
 	end
 
-	# getter methods
-	def getting_age
-		@age
-	end
-
-	def getting_ethnicity
-		@ethnicity
-	end
-
-	# setter methods
+	# attribute changing methods
 	def celebrate_birthday
 		@age+= 1
 	end
@@ -32,10 +25,6 @@ class Santa
 		index_number= @reindeer_ranking.index(reindeer)
 		@reindeer_ranking.delete_at(index_number)
 		@reindeer_ranking.push(reindeer)
-	end
-
-	def change_gender(new_gender)
-		@gender= new_gender
 	end
 
 end
@@ -54,15 +43,15 @@ p santas
 puts "----"
 
 # Initialize an santa 1 instance of Santa to test methods
-santa_1 = Santa.new("robot","Plastic-Steel Composite",reindeers)
+santa_1 = Santa.new("robot","Plastic-Steel Composite",reindeers,21)
 santa_1.speak
 santa_1.eat_milk_and_cookies("SameSite cookie")
 
 p "This santa is now #{santa_1.celebrate_birthday} years old"
 p santa_1.get_mad_at("Vixen")
-p santa_1.change_gender("android")
-p santa_1.getting_age
-p santa_1.getting_ethnicity
+p santa_1.gender= "android"
+p santa_1.age
+p santa_1.ethnicity
 
 
 
