@@ -12,7 +12,7 @@
 # replace one of the moves in the moveset for the new move.
 
 class Pokemon
-	attr_reader :pokemon
+	attr_reader :pokemon_name
 	attr_accessor :nickname, :level, :moveset
 
 	def initialize(given_pokemon_name,given_nickname,given_level,given_moveset)
@@ -45,7 +45,7 @@ class Pokemon
 			valid_response= false
 			puts "-----------"
 			puts "#{@pokemon_name} wants to learn #{new_move} but #{@pokemon_name} already knows 4 moves!"
-			puts "Should a move be forgotten to make space for #{new_move}?"
+			puts "Should a move be forgotten to make space for #{new_move} (yes/no)?"
 
 			until valid_response
 				answer= gets.chomp
@@ -189,8 +189,36 @@ def pokemon_creator
 		end
 	end
 
-	instance_pokemon= Pokemon.new(chosen_pokemon,chosen_nickname,chosen_level,chosen_nickname)
+	instance_pokemon= Pokemon.new(chosen_pokemon,chosen_nickname,chosen_level,chosen_moveset)
 
 end
 
-pokemon_creator
+finished= false
+pokemon_array= []
+
+until finished
+	p pokemon_array.push(pokemon_creator)
+	puts "Are you finished adding pokemon? (yes/no)"
+	
+	valid_responser= false
+	until valid_responser
+		answer=gets.chomp
+		if answer.downcase == 'yes'
+			finished = true
+			valid_responser= true
+		elsif answer.downcase == 'no'
+			valid_responser= true
+		else
+			puts "Invalid response"
+		end
+	end
+
+end
+
+pokemon_array.length.times do |i| 
+	puts pokemon_array[i].i_choose_you
+	pokemon_array[i].level_up
+	pokemon_array[i].learn_new_move("Ice Beam")
+	puts "#{pokemon_array[i].pokemon_name} has a nickname of #{pokemon_array[i].nickname}, is level #{pokemon_array[i].level}" 
+	puts "and knows the following moves: #{pokemon_array[i].moveset}"
+end
