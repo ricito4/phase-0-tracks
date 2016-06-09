@@ -36,9 +36,58 @@ class Pokemon
 		end
 	end
 
+	def learn_new_move(new_move)
+		if @moveset.length < 4
+			puts "#{@pokemon_name} learned #{new_move}!"
+			p @moveset.push(new_move)
+			
+		else
+			valid_response= false
+			puts "-----------"
+			puts "#{@pokemon_name} wants to learn #{new_move} but #{@pokemon_name} already knows 4 moves!"
+			puts "Should a move be forgotten to make space for #{new_move}?"
+
+			until valid_response
+				answer= gets.chomp
+				if answer.downcase == 'yes'
+					
+					puts "Which move should be forgotten?"
+					puts @moveset
+					
+					valid_move= false
+					until valid_move
+						move_to_replace= gets.chomp
+						index= @moveset.index(move_to_replace)
+						if index != nil
+							@moveset[index]= new_move
+							puts "1, 2 and... Poof! #{@pokemon_name} forgot #{move_to_replace} and... #{@pokemon_name} learned #{new_move}!"
+							valid_move= true
+							valid_response= true
+							p @moveset
+						else
+							puts "Invalid move, please type in a move"
+						end
+					end
+
+				elsif answer.downcase == 'no'
+					valid_response= true
+					puts "#{@pokemon_name} did not learn #{new_move}"
+				else
+					puts "This is not a valid response"
+				end
+			end
+		end
+
+	end
 end
 
+# test cases
+# blastoise= Pokemon.new("Blastoise","Blasty",36,["Hydro Pump", "Ice Beam","Rapid Spin", "Strength"])
+# blastoise.i_choose_you
+# blastoise.level_up
+# blastoise.learn_new_move("Hyper Beam")
 
-p blastoise= Pokemon.new("Blastoise","Blasty",36,["Hydro Pump", "Ice Beam","Rapid Spin", "Strength"])
-blastoise.i_choose_you
-blastoise.level_up
+# mewtwo= Pokemon.new("Mewtwo","Mewtwo",100,["Ice Beam"])
+# mewtwo.i_choose_you
+# mewtwo.level_up
+# mewtwo.learn_new_move("Psychic")
