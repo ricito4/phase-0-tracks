@@ -15,9 +15,12 @@ p Shout.yelling_happily("FREE FOOD")
 =end
 
 module Shout
-	def shouter(words)
-    	puts "#{words}!!!"
+	def yell_angrily(words)
+    	words + "!!!" + " :("
 	end
+	def yelling_happily(words)
+		words + "!!!" + " :D"
+  	end
 end
 
 class Speaker
@@ -29,7 +32,9 @@ class Old_Man
 end
 
 shia_labeouf= Speaker.new
-shia_labeouf.shouter("JUST DO IT")
+p shia_labeouf.yelling_happily("JUST DO IT")
+p shia_labeouf.yell_angrily("DON'T LET YOUR DREAMS BE DREAMS")
 
 mr_johnson= Old_Man.new
-mr_johnson.shouter("Get off my lawn")
+p mr_johnson.yell_angrily("Get off my lawn")
+p mr_johnson.yelling_happily("I LOVE FOOD")
