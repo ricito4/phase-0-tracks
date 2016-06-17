@@ -20,6 +20,18 @@ function longestString(given_array) {
 return given_array[index_of_longest];
 }
 
+// a function that takes 2 objects
+// sets an initial boolean value to false, we'll change this to true if the conditions are met
+// Use a nested loop, the first loop iterates through the elments in the first object
+// inside this the first loop is a 2nd loop that will iterate through elements in the 2nd object
+// in the second loop compare each iterated item to the current iteration of the first object
+// if there are any matches change a boolean value to true, else keep it false
+
+
+
+
+//--------------------------------
+// driver code
 array1= ["ab","a","abcd","abc"];
 long1= longestString(array1);
 console.log(long1);
