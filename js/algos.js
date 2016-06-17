@@ -48,8 +48,18 @@ function matchKeyValue(object1,object2) {
 	return valid;
 }
 
+// function takes an integer i for length, creates an array of i strings, each string is 1-10 letters long, 
+// create an alphabet variable "abcde...yz"
+// set a for loop from 0 to i-1
+// in this loop call rand function to generate a string length from 1 to 10 inclusive
+// create another for loop from 0 to stringlength-1 
+// in this loop call rand function to generate a number from 1 to 26
+// use this number as an index for alphabet variable to get a random letter
+// add it to a string, initially empty, that will be string length long 
+
 //--------------------------------
 //first method driver code
+console.log("Testing First method!");
 var array1= ["ab","a","abcd","abc"];
 var long1= longestString(array1);
 console.log(long1); // expect "abcd"
@@ -63,6 +73,7 @@ var long3= longestString(array3);
 console.log(long3); // expect nothing
 
 //second method driver code
+console.log("Testing Second Method!");
 var dog1 = {name:'Cliford', 'age': 28, isAwake: false}; 
 var dog2 = {'name': 'Jake', aged: 28, isAwake: true}; 
 var dog3 = {age: 28, name: 'Cake', isAwake: true};
