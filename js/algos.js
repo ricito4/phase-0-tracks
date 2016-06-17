@@ -27,19 +27,46 @@ return given_array[index_of_longest];
 // in the second loop compare each iterated item to the current iteration of the first object
 // if there are any matches change a boolean value to true, else keep it false
 
-
-
+function matchKeyValue(object1,object2) {
+	// value to return that changes to true if conditions are met
+	valid = false;
+	// iterate through each key value pair in object 1
+	for(var key1 in object1) {
+		// nested iterate through each key value pair in object 2
+		for (var key2 in object2) {
+			// if the keys are equal
+			if (key1== key2) {
+				// if the values at the current keys are equal change valid to true
+				if (object1[key1] == object2[key2]) {
+					valid=true;
+				}
+			}
+		}
+		
+	}
+	//return if any key value pairs matched
+	return valid;
+}
 
 //--------------------------------
-// driver code
-array1= ["ab","a","abcd","abc"];
-long1= longestString(array1);
-console.log(long1);
+//first method driver code
+var array1= ["ab","a","abcd","abc"];
+var long1= longestString(array1);
+console.log(long1); // expect "abcd"
 
-array2= ["Hello","I","Am"];
-long2= longestString(array2);
-console.log(long2);
+var array2= ["Hello","I","Am"];
+var long2= longestString(array2);
+console.log(long2); // expect "Hello"
 
-array3= [];
-long3= longestString(array3);
-console.log(long3);
+var array3= [];
+var long3= longestString(array3);
+console.log(long3); // expect nothing
+
+//second method driver code
+var dog1 = {name:'Cliford', 'age': 28, isAwake: false}; 
+var dog2 = {'name': 'Jake', aged: 28, isAwake: true}; 
+var dog3 = {age: 28, name: 'Cake', isAwake: true};
+
+console.log(matchKeyValue(dog1,dog2)); // expect false
+console.log(matchKeyValue(dog1,dog3)); // expect true
+console.log(matchKeyValue(dog2,dog3)); // expect true
