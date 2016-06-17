@@ -7,20 +7,25 @@
 
 function longestString(given_array) {
 	// get array length for looping and start with the returned index as the first element in the array
-	array_length=given_array.length;
-	index_of_longest= 0;
-	
-	if (array_length > 1) {
-		// iterate till the length of the array - 1 since we are referencing the i+1th element
-		for (var i= 0; i < array_length-1; i++) {
-			// if the length of the string at the i+1 index is greater than the current longest index, replace it with the i+1 
-			if (given_array[i+1].length > given_array[index_of_longest].length) {
-				index_of_longest= i+1;
-			}
-		} 
+	var array_length=given_array.length;
+	if (array_length < 1) {
+		return "This array is empty"
 	}
-	// return the longest string in the array
-	return given_array[index_of_longest];
+	else {
+		var index_of_longest= 0;
+	
+		if (array_length > 1) {
+			// iterate till the length of the array - 1 since we are referencing the i+1th element
+			for (var i= 0; i < array_length-1; i++) {
+				// if the length of the string at the i+1 index is greater than the current longest index, replace it with the i+1 
+				if (given_array[i+1].length > given_array[index_of_longest].length) {
+					index_of_longest= i+1;
+				}
+			} 
+		}
+		// return the longest string in the array
+		return given_array[index_of_longest];
+	}
 }
 
 // a function that takes 2 objects
@@ -32,7 +37,7 @@ function longestString(given_array) {
 
 function matchKeyValue(object1,object2) {
 	// value to return that changes to true if conditions are met
-	valid = false;
+	var valid = false;
 	// iterate through each key value pair in object 1
 	for(var key1 in object1) {
 		// nested iterate through each key value pair in object 2
@@ -44,8 +49,7 @@ function matchKeyValue(object1,object2) {
 					valid=true;
 				}
 			}
-		}
-		
+		}	
 	}
 	//return if any key value pairs matched
 	return valid;
@@ -59,19 +63,20 @@ function matchKeyValue(object1,object2) {
 // in this loop call random function to generate a number from 1 to 26
 // use this number as an index for alphabet variable to get a random letter
 // add it to a string, initially empty, that will be string length long 
+// add the completed string to the current element of the array
 // return an array of integer number strings
 
 function createRandomExamples(integer) {
 	var alphabet= "abcdefghijklmnopqrstuvwxyz";
-	array_returned= [];
+	var array_returned= [];
 
 	for(i=0; i < integer; i++) {
-		string_length= Math.ceil((Math.random() * 10));
+		var string_length= Math.ceil((Math.random() * 10));
 		
-		temporary_string= "";
+		var temporary_string= "";
 		for (j=0; j < string_length; j++) {
 			letter_random= alphabet[Math.ceil((Math.random() * 26)-1)];
-			temporary_string= temporary_string + letter_random
+			temporary_string= temporary_string + letter_random;
 		}
 		array_returned[i]= temporary_string;
 
@@ -81,31 +86,40 @@ return array_returned;
 }
 
 
-//--------------------------------
 //first method driver code
 console.log("Testing First method!");
 var array1= ["ab","a","abcd","abc"];
 var long1= longestString(array1);
-console.log(long1); // expect "abcd"
+console.log(long1 + " is the longest word in " + array1); // expect "abcd"
 
 var array2= ["Hello","I","Am"];
 var long2= longestString(array2);
-console.log(long2); // expect "Hello"
+console.log(long2 + " is the longest word in " + array2); // expect "Hello"
 
 var array3= [];
 var long3= longestString(array3);
-console.log(long3); // expect nothing
+console.log(long3); // expect printed statement
 
 //second method driver code
+console.log("-----------");
 console.log("Testing Second Method!");
 var dog1 = {name:'Cliford', 'age': 28, isAwake: false}; 
-var dog2 = {'name': 'Jake', aged: 28, isAwake: true}; 
+var dog2 = {'name': 'Jake', aged: 28, additional_info: "huh?", isAwake: true}; 
 var dog3 = {age: 28, name: 'Cake', isAwake: true};
 
-console.log(matchKeyValue(dog1,dog2)); // expect false
+console.log(matchKeyValue(dog1,dog2)); // expect false 
+// while name and isAwake tags were the same, the values were different, while aged and age values are the same, the tags are not
 console.log(matchKeyValue(dog1,dog3)); // expect true
+// despite the order of the tags in dog1 and dog3 being different the age tag and value match up
 console.log(matchKeyValue(dog2,dog3)); // expect true
+// despite the order and number of tags being different in dog2 and dog3 the isAwake tag and value match up
 
 //third method driver code
-arrayyy= createRandomExamples(3);
-console.log(arrayyy);
+console.log("-----------");
+console.log("Testing Third Method!");
+for (k=1; k <= 10; k++) {
+	var random_integer= Math.ceil((Math.random() * 5));
+	var temporary_array= createRandomExamples(random_integer);
+	var long_string= longestString(temporary_array);
+	console.log(long_string + " is the longest word in array #" + k +": " + temporary_array);
+}
