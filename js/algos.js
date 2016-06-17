@@ -8,12 +8,13 @@
 function longestString(given_array) {
 	// get array length for looping and start with the returned index as the first element in the array
 	var array_length=given_array.length;
+	// if the array is empty return this string else continue
 	if (array_length < 1) {
 		return "This array is empty"
 	}
 	else {
 		var index_of_longest= 0;
-	
+		// if the array is longer than 1 we have to compare
 		if (array_length > 1) {
 			// iterate till the length of the array - 1 since we are referencing the i+1th element
 			for (var i= 0; i < array_length-1; i++) {
@@ -67,21 +68,28 @@ function matchKeyValue(object1,object2) {
 // return an array of integer number strings
 
 function createRandomExamples(integer) {
+	// initialize a variable alphabet to be referenced and an array to be returned
 	var alphabet= "abcdefghijklmnopqrstuvwxyz";
 	var array_returned= [];
-
+	// for each element the return array is supposed to have, total number = integer
 	for(i=0; i < integer; i++) {
+		// use random and ceil functions to select a string length between 1-10
 		var string_length= Math.ceil((Math.random() * 10));
-		
+		// initialize a temporary string that we will add letter to and at the end be added to the return array
 		var temporary_string= "";
+		// create a random letter string_length number of times and add it to the temporary string
 		for (j=0; j < string_length; j++) {
+			// call random and ceil functions to select a random index to select a letter in the string alphabet
 			letter_random= alphabet[Math.ceil((Math.random() * 26)-1)];
+			// add the letter to the temporary string
 			temporary_string= temporary_string + letter_random;
 		}
+		// add the temporary string to the array as the ith element
 		array_returned[i]= temporary_string;
 
 	}
-return array_returned;
+	// after complete return the full array
+	return array_returned;
 	
 }
 
@@ -117,9 +125,13 @@ console.log(matchKeyValue(dog2,dog3)); // expect true
 //third method driver code
 console.log("-----------");
 console.log("Testing Third Method!");
+//create 10 arrays using the createRandomExamples method and for each call the longestString method
 for (k=1; k <= 10; k++) {
+	// picks a random number between 1 to 5 to use for createRandomExamples method
 	var random_integer= Math.ceil((Math.random() * 5));
+	// Call createRandomExamples method to create and store an array
 	var temporary_array= createRandomExamples(random_integer);
+	// Call longestString method to select the longest string in the array we got from createRandomExamples
 	var long_string= longestString(temporary_array);
 	console.log(long_string + " is the longest word in array #" + k +": " + temporary_array);
 }
