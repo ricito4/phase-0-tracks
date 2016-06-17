@@ -9,15 +9,18 @@ function longestString(given_array) {
 	// get array length for looping and start with the returned index as the first element in the array
 	array_length=given_array.length;
 	index_of_longest= 0;
-	// iterate till the length of the array - 1 since we are referencing the i+1th element
-	for (var i= 0; i < array_length-1; i++) {
-		// if the length of the string at the i+1 index is greater than the current longest index, replace it with the i+1 
-		if (given_array[i+1].length > given_array[index_of_longest].length) {
-			index_of_longest= i+1;
-		}
-	} 
-// return the longest string in the array
-return given_array[index_of_longest];
+	
+	if (array_length > 1) {
+		// iterate till the length of the array - 1 since we are referencing the i+1th element
+		for (var i= 0; i < array_length-1; i++) {
+			// if the length of the string at the i+1 index is greater than the current longest index, replace it with the i+1 
+			if (given_array[i+1].length > given_array[index_of_longest].length) {
+				index_of_longest= i+1;
+			}
+		} 
+	}
+	// return the longest string in the array
+	return given_array[index_of_longest];
 }
 
 // a function that takes 2 objects
@@ -51,11 +54,32 @@ function matchKeyValue(object1,object2) {
 // function takes an integer i for length, creates an array of i strings, each string is 1-10 letters long, 
 // create an alphabet variable "abcde...yz"
 // set a for loop from 0 to i-1
-// in this loop call rand function to generate a string length from 1 to 10 inclusive
+// in this loop call random function to generate a string length from 1 to 10 inclusive
 // create another for loop from 0 to stringlength-1 
-// in this loop call rand function to generate a number from 1 to 26
+// in this loop call random function to generate a number from 1 to 26
 // use this number as an index for alphabet variable to get a random letter
 // add it to a string, initially empty, that will be string length long 
+// return an array of integer number strings
+
+function createRandomExamples(integer) {
+	var alphabet= "abcdefghijklmnopqrstuvwxyz";
+	array_returned= [];
+
+	for(i=0; i < integer; i++) {
+		string_length= Math.ceil((Math.random() * 10));
+		
+		temporary_string= "";
+		for (j=0; j < string_length; j++) {
+			letter_random= alphabet[Math.ceil((Math.random() * 26)-1)];
+			temporary_string= temporary_string + letter_random
+		}
+		array_returned[i]= temporary_string;
+
+	}
+return array_returned;
+	
+}
+
 
 //--------------------------------
 //first method driver code
@@ -81,3 +105,7 @@ var dog3 = {age: 28, name: 'Cake', isAwake: true};
 console.log(matchKeyValue(dog1,dog2)); // expect false
 console.log(matchKeyValue(dog1,dog3)); // expect true
 console.log(matchKeyValue(dog2,dog3)); // expect true
+
+//third method driver code
+arrayyy= createRandomExamples(3);
+console.log(arrayyy);
