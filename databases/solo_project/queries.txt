@@ -1,0 +1,55 @@
+1. SELECT * FROM Pokemon;
+
+1|Pikachu|25|false|13|19
+2|Gengar|55|true|8|4
+3|Scizor|77|true|7|9
+4|Latios|80|true|16|14
+5|Gilscor|55|true|5|3
+6|Squirtle|15|false|11|19
+
+2. UPDATE Pokemon SET name="Wartortle", level=16 WHERE id= 6;
+
+3. SELECT * FROM Pokemon, Types WHERE Pokemon.type_2 = Types.id;
+
+1|Pikachu|25|false|13|19|19|none
+2|Gengar|55|true|8|4|4|poison
+3|Scizor|77|true|7|9|9|steel
+4|Latios|80|true|16|14|14|psychic
+5|Gilscor|55|true|5|3|3|flying
+6|Wartortle|16|false|11|19|19|none
+
+
+4. SELECT Pokemon.name, Types.type_name FROM Pokemon JOIN Types ON Pokemon.type_1 = Types.id;
+
+Pikachu|electric
+Gengar|ghost
+Scizor|bug
+Latios|dragon
+Gilscor|ground
+Wartortle|water
+
+
+5. DELETE FROM Pokemon WHERE level > 78;
+SELECT * FROM Pokemon;
+
+1|Pikachu|25|false|13|19
+2|Gengar|55|true|8|4
+3|Scizor|77|true|7|9
+5|Gilscor|55|true|5|3
+6|Squirtle|15|false|11|19
+
+SELECT name FROM Pokemon INNER JOIN Types ON Pokemon.type_1= Types.id;
+
+Pikachu
+Gengar
+Scizor
+Gilscor
+Wartortle
+
+SELECT * FROM Pokemon LEFT JOIN Types ON Pokemon.type_1= Types.id;
+
+1|Pikachu|25|false|13|19|13|electric
+2|Gengar|55|true|8|4|8|ghost
+3|Scizor|77|true|7|9|7|bug
+5|Gilscor|55|true|5|3|5|ground
+6|Wartortle|16|false|11|19|11|water
