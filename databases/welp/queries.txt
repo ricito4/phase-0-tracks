@@ -1,0 +1,15 @@
+Join 3 tables
+SELECT * FROM reviews
+ JOIN businesses ON businesses.id = reviews.business_id
+ JOIN users ON users.id = reviews.user_id;
+
+Choose select data
+SELECT businesses.name, users.first_name, users.last_name, reviews.stars, reviews.comment FROM reviews
+ JOIN businesses ON businesses.id = reviews.business_id
+ JOIN users ON users.id = reviews.user_id;
+
+view data of all 3 tables for one business
+SELECT businesses.name, users.first_name, users.last_name, reviews.stars, reviews.comment FROM reviews
+ JOIN businesses ON businesses.id = reviews.business_id
+ JOIN users ON users.id = reviews.user_id
+ WHERE businesses.name = "Amir's Towing";
