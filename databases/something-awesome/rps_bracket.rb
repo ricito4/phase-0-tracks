@@ -11,10 +11,10 @@ data = SQLite3::Database.new( "rps.db" )
 create_game_table_cmd = <<-SQL
 	CREATE TABLE IF NOT EXISTS games(
 		id INTEGER PRIMARY KEY,
-		name_1 INT,
+		name_1 VARCHAR(255),
 		games_won_1 INT,
-		name_2 INT,
-		games_won_2 INT,
+		name_2 VARCHAR(255),
+		games_won_2 INT
 	)
 SQL
 
@@ -24,19 +24,51 @@ SQL
 create_players_table_cmd = <<-SQL
 	CREATE TABLE IF NOT EXISTS players(
 		id INTEGER PRIMARY KEY,
-		name INT,
-		placing VARCHAR(255),
+		name VARCHAR(255),
+		placing VARCHAR(255)
 	)
 SQL
+
+# create tables games and players
+#data.execute(create_game_table_cmd)
+#data.execute(create_players_table_cmd)
+
+
+def player_creator(data,name)
+	#data.execute("INSERT INTO players (name,placing) VALUES (?,?)",[name,"0"])
+end
+
+def evaluate_match(array_1,array_2,loser_placing)
+	puts "How many games did player 1 win"
+	games_1_won=gets.to_i
+	puts "How many games did player 1 win"
+	games_2_won=gets.to_i
+
+	# update player who lost's placing
+	# create a row in game table with the information
+end
+
 
 puts "Welcome to my rock-paper-scissor tournament"
 puts "Select how many players will participate!"
 number_players= gets.to_i
 
-puts "Input player names one line at a time"
+puts "Input each unique player's name one line at a time"
 name_array= []
+
 number_players.times do |variable|
-	name_array << gets.chomp
+	
+	valid_name= false
+	until valid_name
+		name= gets.chomp
+		if name == "" || name == "placeholder" || name_array.index("#{name}") != nil
+			puts "This is an invalid name"
+		else
+			valid_name= true
+		end
+	end
+	
+	name_array << name
 end
 
 # find how many rounds it will take
