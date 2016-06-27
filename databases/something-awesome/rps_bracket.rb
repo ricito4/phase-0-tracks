@@ -1,9 +1,11 @@
 # require gems
 require 'sqlite3'
-require 'faker'
 # create new database called rps
 data = SQLite3::Database.new( "rps.db" ) 
 
+#clear tables
+data.execute("DROP TABLE players")
+data.execute("DROP TABLE games")
 # Game table
 # uses int primary key for unique game number
 # the name of the player, the number of games he won
@@ -30,24 +32,41 @@ create_players_table_cmd = <<-SQL
 SQL
 
 # create tables games and players
-#data.execute(create_game_table_cmd)
-#data.execute(create_players_table_cmd)
+data.execute(create_game_table_cmd)
+data.execute(create_players_table_cmd)
 
 
-def player_creator(data,name)
-	#data.execute("INSERT INTO players (name,placing) VALUES (?,?)",[name,"0"])
+def player_creator(data_var,name)
+	data_var.execute("INSERT INTO players (name,placing) VALUES (?,?)",[name,"no place"])
 end
 
-def evaluate_match(array_1,array_2,loser_placing)
-	puts "How many games did player 1 win"
-	games_1_won=gets.to_i
-	puts "How many games did player 1 win"
-	games_2_won=gets.to_i
-
-	# update player who lost's placing
+def evaluate_match(data_var,given_name_1,given_name_2,loser_placing)
+	valid_match= false
+	until valid_match
+		puts "How many games did #{given_name_1} win"
+		games_1=gets.to_i
+		puts "How many games did #{given_name_2} win"
+		games_2=gets.to_i
+		if games_1== games_2
+			puts "One player has to have won more games than the other"
+		else
+			valid_match= true
+		end
+	end
+	
 	# create a row in game table with the information
+	data_var.execute("INSERT INTO games (name_1, games_won_1, name_2, games_won_2) VALUES (?,?,?,?)",[given_name_1,games_1,given_name_2,games_2])
+	
+	# update player who lost's placing
+	if games_1 > games_2
+		data_var.execute("UPDATE players SET placing = ? WHERE name= ?",[loser_placing,given_name_2])
+		return given_name_2
+	else
+		data_var.execute("UPDATE players SET placing = ? WHERE name= ?",[loser_placing,given_name_1])
+		return given_name_1
+	end
+	
 end
-
 
 puts "Welcome to my rock-paper-scissor tournament"
 puts "Select how many players will participate!"
@@ -95,9 +114,19 @@ end
 name_array.shuffle!
 p name_array
 
-# for each round
-number_of_rounds.times do
 
+count=0
+while count < name_array.length
+	player_creator(data,name_array[count])
+	count +=1
 end
 
-#db.execute(create_game_table_cmd)
+p loser=evaluate_match(data,"RAY","Jen",7)
+
+# for each round
+number_of_rounds.times do
+	i = 0 
+	while i < name_array.length/2
+		i+=1
+	end
+end
